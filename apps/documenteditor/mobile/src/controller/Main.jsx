@@ -113,6 +113,7 @@ class MainController extends Component {
         const storeDocumentInfo = this.props.storeDocumentInfo;
 
         storeDocumentInfo.setDataDoc(data.doc);
+
         // Common.SharedSettings.set('document', data.doc);
 
         // if (data.doc) {
@@ -273,10 +274,12 @@ class MainController extends Component {
     const storeDocumentInfo = this.props.storeDocumentInfo;
 
     this.api.asc_registerCallback("asc_onGetDocInfoStart", () => {
+      console.log("Start");
       storeDocumentInfo.switchIsLoaded(false);
     });
 
     this.api.asc_registerCallback("asc_onGetDocInfoStop", () => {
+      console.log("End");
       storeDocumentInfo.switchIsLoaded(true);
     });
 
