@@ -7,7 +7,6 @@ const PageDocumentInfo = (props) => {
   const { t } = useTranslation();
   const _t = t("Settings", { returnObjects: true });
   const storeInfo = props.storeDocumentInfo;
-  const docProps = props.getDocProps();
   const dataApp = props.getAppProps();
   const dataModified = props.getModified();
   const dataModifiedBy = props.getModifiedBy();
@@ -21,16 +20,14 @@ const PageDocumentInfo = (props) => {
   const dataDoc = JSON.parse(JSON.stringify(storeInfo.dataDoc));
   const isLoaded = storeInfo.isLoaded;
 
-  //   console.log(dataModified);
-  //   console.log(dataModifiedBy);
-  //   console.log(dataApp);
-  //   console.log(docProps);
-  //   console.log(isLoaded);
-  //   console.log(dataDoc);
-  //   console.log(wordsCount);
-  //   console.log(paragraphCount);
-
   if (!isLoaded) {
+    console.log(
+      pageCount,
+      paragraphCount,
+      symbolsCount,
+      symbolsWSCount,
+      wordsCount
+    );
     return (
       <Page>
         <Navbar title={_t.textDocumentInfo} backLink={_t.textBack} />
@@ -54,18 +51,26 @@ const PageDocumentInfo = (props) => {
           <ListItem title="Symbols" after={symbolsCount}></ListItem>
           <ListItem title="Spaces" after={symbolsWSCount}></ListItem>
         </List>
-        <BlockTitle>{_t.textLastModified}</BlockTitle>
-        <List>
-          <ListItem title="11/19/2020 1:13 PM"></ListItem>
-        </List>
-        <BlockTitle>{_t.textLastModifiedBy}</BlockTitle>
-        <List>
-          <ListItem title="John Smith"></ListItem>
-        </List>
-        <BlockTitle>{_t.textApplication}</BlockTitle>
-        <List>
-          <ListItem title="ONLYOFFICE/6.0.2.5"></ListItem>
-        </List>
+        {dataModified && dataModifiedBy ? (
+          <Block>
+            <BlockTitle>{_t.textLastModified}</BlockTitle>
+            <List>
+              <ListItem title="11/19/2020 1:13 PM"></ListItem>
+            </List>
+            <BlockTitle>{_t.textLastModifiedBy}</BlockTitle>
+            <List>
+              <ListItem title="John Smith"></ListItem>
+            </List>
+          </Block>
+        ) : null}
+        {dataApp ? (
+          <Block>
+            <BlockTitle>{_t.textApplication}</BlockTitle>
+            <List>
+              <ListItem title="ONLYOFFICE/6.0.2.5"></ListItem>
+            </List>
+          </Block>
+        ) : null}
       </Page>
     );
   }

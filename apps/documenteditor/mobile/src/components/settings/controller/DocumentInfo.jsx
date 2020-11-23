@@ -18,8 +18,8 @@ class DocumentInfoController extends Component {
     const api = Common.EditorApi.get();
     if (api) {
       const appProps = api.asc_getAppProps();
+      console.log(appProps);
       if (appProps) {
-        console.log(appProps);
         let appName =
           (appProps.asc_getApplication() || "") +
           (appProps.asc_getAppVersion() ? " " : "") +
@@ -33,6 +33,7 @@ class DocumentInfoController extends Component {
     const docProps = this.getDocProps();
     if (docProps) {
       let valueModified = docProps.asc_getModified();
+      console.log(docProps);
       if (valueModified) {
         return (
           valueModified.toLocaleString(_lang, {
@@ -52,7 +53,6 @@ class DocumentInfoController extends Component {
     if (docProps) {
       let valueModifiedBy = docProps.asc_getLastModifiedBy();
       if (valueModifiedBy) {
-        console.log(valueModifiedBy);
         return Common.Utils.UserInfoParser.getParsedName(valueModifiedBy);
       }
     }
@@ -68,10 +68,10 @@ class DocumentInfoController extends Component {
   render() {
     return (
       <DocumentInfo
-        getDocProps={this.getDocProps}
         getAppProps={this.getAppProps}
         getModified={this.getModified}
         getModifiedBy={this.getModifiedBy}
+        getDocProps={this.getDocProps}
       />
     );
   }
